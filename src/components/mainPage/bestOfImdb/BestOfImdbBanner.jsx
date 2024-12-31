@@ -13,6 +13,7 @@ const BestOfImdbBanner = () => {
     return <div>No item found.</div>; // اگر هیچ داده‌ای یافت نشد، پیامی نشان می‌دهیم
   }
 
+  // اگر clickedItem وجود داشته باشد، می‌توانیم destructure کنیم
   const { banner, faName } = clickedItem;
 
   return (
