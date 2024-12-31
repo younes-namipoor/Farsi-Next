@@ -4,16 +4,19 @@ import { useSelector } from "react-redux";
 const BestOfImdbBanner = () => {
   const bestOfImdb = useSelector((state) => state.bestOfImdb.initValue);
   const clickedId = useSelector((state) => state.bestOfImdb.clickedId);
+  
+  // فیلتر کردن با دقت و چک کردن اینکه نتیجه خالی نباشد
   const clickedItem = bestOfImdb.filter(({ id }) => id === clickedId);
+  
+  // بررسی وجود نتیجه قبل از دسترسی به ویژگی‌ها
+  if (clickedItem.length === 0) {
+    return <div>No item found.</div>; // اگر هیچ چیزی پیدا نشد، می‌توانید پیامی نمایش دهید
+  }
 
   const { banner, faName } = clickedItem[0];
 
   return (
-    <div
-      className={
-        "flex justify-end w-full h-full bg-gradient-banner overflow-hidden absolute top-0"
-      }
-    >
+    <div className={"flex justify-end w-full h-full bg-gradient-banner overflow-hidden absolute top-0"}>
       <div className={"w-full h-full bg-gradient-banner absolute"}></div>
       <div className={"w-full h-full bg-gradient-banner2 absolute"}></div>
       <div className={"w-full h-full bg-gradient-banner3 absolute"}></div>
