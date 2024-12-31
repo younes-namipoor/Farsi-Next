@@ -5,15 +5,15 @@ const BestOfImdbBanner = () => {
   const bestOfImdb = useSelector((state) => state.bestOfImdb.initValue);
   const clickedId = useSelector((state) => state.bestOfImdb.clickedId);
   
-  // فیلتر کردن با دقت و چک کردن اینکه نتیجه خالی نباشد
-  const clickedItem = bestOfImdb.filter(({ id }) => id === clickedId);
-  
-  // بررسی وجود نتیجه قبل از دسترسی به ویژگی‌ها
-  if (clickedItem.length === 0) {
-    return <div>No item found.</div>; // اگر هیچ چیزی پیدا نشد، می‌توانید پیامی نمایش دهید
+  // فیلتر کردن و بررسی که آیا نتیجه‌ای برمی‌گرداند
+  const clickedItem = bestOfImdb.find(({ id }) => id === clickedId);
+
+  // بررسی اینکه آیا clickedItem موجود است یا خیر
+  if (!clickedItem) {
+    return <div>No item found.</div>; // اگر هیچ داده‌ای یافت نشد، پیامی نشان می‌دهیم
   }
 
-  const { banner, faName } = clickedItem[0];
+  const { banner, faName } = clickedItem;
 
   return (
     <div className={"flex justify-end w-full h-full bg-gradient-banner overflow-hidden absolute top-0"}>
